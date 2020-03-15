@@ -26,6 +26,10 @@ class App extends React.Component {
   }
 
   render() {
+    if (process.env.NODE_ENV === 'development' && !this.store.app.isDevStoreLoaded) {
+      return null;
+    }
+
     return (
       <StoreContext.Provider value={this.store}>
         <Router history={this.syncedHistory}>

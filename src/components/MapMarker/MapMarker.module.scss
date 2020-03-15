@@ -1,0 +1,22 @@
+.marker {
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  border-width: 2px;
+  border-style: solid;
+
+  &.you {
+    width: 20px;
+    height: 20px;
+    background-color: skyblue;
+    border-color: deepskyblue;
+    opacity: 0.8;
+  }
+
+  &.somebody {
+    width: 30px;
+    height: 30px;
+    background-color: violet;
+    border-color: mediumorchid;
+    opacity: 0.5;
+  }
+}

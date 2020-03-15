@@ -1,9 +1,9 @@
 import { RouterStore } from 'mobx-react-router';
-import { Others } from './others';
+import { createAppStore } from './app';
 
 export function createStore(routingStore: RouterStore) {
   return {
-    others: new Others(),
+    app: createAppStore(),
     routingStore
   };
 }

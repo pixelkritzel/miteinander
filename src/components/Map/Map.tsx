@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { GoogleMap, LoadScript, OverlayView } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
-import { You } from 'components/markers/You/You';
-import { Other } from 'components/markers/Other';
+import { MapMarker } from 'components/MapMarker';
 import { StoreContext } from 'components/StoreContext';
 import { observable } from 'mobx';
 
 import { Position as YourPosition } from 'types/position';
 import { observer } from 'mobx-react';
+import { LoadingSpinner } from 'components/LoadingSpiner';
 
 const GMAP_OPTIONS = {
   clickableIcons: false,
@@ -25,8 +25,6 @@ export class Map extends React.Component<MapProps> {
 
   @observable
   yourPosition = { lat: 0, lng: 0 };
-
-  overlay: OverlayView | null = null;
 
   getGeolocation = () => {
     return new Promise<YourPosition>((resolve, reject) => {
@@ -50,12 +48,16 @@ export class Map extends React.Component<MapProps> {
     } catch (e) {
       alert('LOCATION SERVICES NOT AVAILABLE!');
     }
-    await this.context.others.load(this.yourPosition);
+    this.context.app.needingHelp.load(this.yourPosition);
   }
 
   render() {
     return (
-      <LoadScript id='script-loader' googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}>
+      <LoadScript
+        id='script-loader'
+        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
+        loadingElement={LoadingSpinner}
+      >
         <GoogleMap
           id='example-map'
           zoom={14.5}
@@ -63,15 +65,15 @@ export class Map extends React.Component<MapProps> {
           options={GMAP_OPTIONS}
           mapContainerStyle={{ width: '100%', height: '100vh' }}
         >
-          <You markerId={1000000} onMarkerClick={alert} position={this.yourPosition} />
-          {this.context.others.all.map(({ lat, lng, id }, index) => (
-            <Other
+          <MapMarker markerId={1000000} position={this.yourPosition} variant='you' />
+          {this.context.app.needingHelp.all.map(({ lat, lng, id }, index) => (
+            <MapMarker
               markerId={id}
               onMarkerClick={() => {
-                console.log('click');
                 this.context.routingStore.push(`/contact/${id}`);
               }}
               position={{ lat, lng }}
+              variant='somebody'
               key={id}
             />
           ))}
