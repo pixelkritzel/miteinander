@@ -21,6 +21,10 @@ export class Contact extends React.Component<ContactProps> {
   @observable
   contact: IpersonNeedingHelp | null = null;
 
+  sendRequest = () => {
+    new Notification('SOMEBODY IS CALLING YOU', { body: 'AND NOBODY KNOWS WHO IT IS' });
+  };
+
   async componentDidMount() {
     const { contactId } = this.props.match.params;
     const contact = this.context.app.needingHelp.findById(Number(contactId));
@@ -55,7 +59,9 @@ export class Contact extends React.Component<ContactProps> {
                 <strong>{dict.personNeedingHelp.categories[category]}</strong>
                 {!!note.length && <p>{note}</p>}
                 <div>
-                  <Button variant='primary'>{dict.components.contact.offer_help(nickname)}</Button>
+                  <Button variant='primary' onClick={this.sendRequest}>
+                    {dict.components.contact.offer_help(nickname)}
+                  </Button>
                 </div>
               </React.Fragment>
             ))}

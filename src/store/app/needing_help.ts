@@ -33,7 +33,6 @@ const personNeedingHelp = types.model('personNeedingHelp', {
       note: types.string
     })
   ),
-
   status: types.maybe(status),
   isVulnerable: types.boolean
 });

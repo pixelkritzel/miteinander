@@ -9,6 +9,7 @@ import { Map } from 'components/Map';
 import { StoreContext } from 'components/StoreContext/StoreContext';
 import { Contact } from 'components/Contact/Contact';
 import { Store, createStore } from 'store';
+import { EnableNotifications } from 'components/EnableNotifications';
 
 @observer
 class App extends React.Component {
@@ -32,14 +33,16 @@ class App extends React.Component {
 
     return (
       <StoreContext.Provider value={this.store}>
-        <Router history={this.syncedHistory}>
-          <Switch>
-            <Route path='/contact/:contactId' component={Contact} />
-            <Route path='/'>
-              <Map />
-            </Route>
-          </Switch>
-        </Router>
+        <EnableNotifications>
+          <Router history={this.syncedHistory}>
+            <Switch>
+              <Route path='/contact/:contactId' component={Contact} />
+              <Route path='/'>
+                <Map />
+              </Route>
+            </Switch>
+          </Router>
+        </EnableNotifications>
       </StoreContext.Provider>
     );
   }

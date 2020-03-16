@@ -7,7 +7,7 @@ interface ButtonProps
   disabled?: true;
   element?: 'button' | 'a' | 'div' | 'input';
   outline?: true;
-  size?: 'lg' | 'sm' | 'block;';
+  size?: 'lg' | 'sm' | 'block';
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
   type?: 'button' | 'submit' | 'reset';
 }
@@ -36,6 +36,7 @@ export class Button extends React.Component<ButtonProps> {
 
     return React.createElement(
       element!,
+      /* eslint-disable no-useless-computed-key */
       {
         type,
         className: cx('btn', className, outline ? `btn-outline-${variant}` : `btn-${variant}`, {
@@ -43,10 +44,11 @@ export class Button extends React.Component<ButtonProps> {
           ['disabled']: !!disabled,
           [`btn-${outline}`]: !!outline
         }),
-        ariaDisabled: !!disabled,
+        ['aria-disabled']: !!disabled,
         disabled: !!disabled,
         ...otherProps
       },
+      /* eslint-enable no-useless-computed-key */
       children
     );
   }
