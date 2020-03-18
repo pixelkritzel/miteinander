@@ -4,7 +4,7 @@ import { Badge, BadgeProps } from 'components/Badge';
 
 import { dict } from 'dict';
 
-const { status: statusDict } = dict.personNeedingHelp;
+const { status: statusDict } = dict.components.human;
 
 const variants = {
   QUARANTINED: 'warning',

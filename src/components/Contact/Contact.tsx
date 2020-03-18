@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-import { StoreContext } from 'components/StoreContext';
-import { IpersonNeedingHelp } from 'store/app/needing_help';
+import { Col, Container, Row } from 'components/Grid';
+
+import { dict } from 'dict';
+import { ID } from 'types/id';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Status } from 'components/Status';
-import { dict } from 'dict';
-import { Badge } from 'components/Badge';
-import { Container, Row, Col } from 'components/Grid';
-import { Button } from 'components/Button';
 
-interface ContactProps extends RouteComponentProps<{ contactId: string }> {}
+import { Icontact } from 'store/app/contacts';
+import { StoreContext } from 'components/StoreContext';
+import { Badge } from 'components/Badge';
+import { Status } from 'components/Status';
+
+interface ContactProps extends RouteComponentProps<{ id: ID }> {}
 
 @observer
 export class Contact extends React.Component<ContactProps> {
@@ -19,57 +21,38 @@ export class Contact extends React.Component<ContactProps> {
   context!: React.ContextType<typeof StoreContext>;
 
   @observable
-  contact: IpersonNeedingHelp | null = null;
-
-  sendRequest = () => {
-    new Notification('SOMEBODY IS CALLING YOU', { body: 'AND NOBODY KNOWS WHO IT IS' });
-  };
+  contact: Icontact | null = null;
 
   async componentDidMount() {
-    const { contactId } = this.props.match.params;
-    const contact = this.context.app.needingHelp.findById(Number(contactId));
+    const { id } = this.props.match.params;
+    const contact = this.context.app.contacts.findById(id);
     if (contact) {
       this.contact = contact;
     } else {
-      throw new Error(`Unable to resolve contactId ${contactId} `);
+      throw new Error(`Unable to resolve id ${id} `);
     }
   }
 
   render() {
-    if (!this.contact) {
+    if (!this.contact || !this.contact.recipient) {
       return null;
     }
-    const { isVulnerable, needs, nickname, status } = this.contact;
+
+    const { isVulnerable, status, nickname } = this.contact.recipient;
     return (
       <Container>
         <Row>
           <Col>
-            <h1>{nickname}</h1>
-            {isVulnerable && (
-              <Badge variant='primary'>{dict.personNeedingHelp.isVulnerable}</Badge>
-            )}{' '}
-            {status && <Status status={status} />}
+            {dict.components.contact.your_contact_with}
+            {nickname}
           </Col>
         </Row>
         <Row>
           <Col>
-            <h3>{dict.components.contact.asks_for_help_with}</h3>
-            {needs.map(({ category, note }, index) => (
-              <React.Fragment key={index}>
-                <strong>{dict.personNeedingHelp.categories[category]}</strong>
-                {!!note.length && <p>{note}</p>}
-                <div>
-                  <Button variant='primary' onClick={this.sendRequest}>
-                    {dict.components.contact.offer_help(nickname)}
-                  </Button>
-                </div>
-              </React.Fragment>
-            ))}
+            {isVulnerable && <Badge variant='primary'>{dict.components.human.isVulnerable}</Badge>}{' '}
+            {status && <Status status={status} />}
           </Col>
         </Row>
-        <button type='button' onClick={() => this.context.routingStore.goBack()}>
-          Back
-        </button>
       </Container>
     );
   }

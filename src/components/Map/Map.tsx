@@ -48,7 +48,7 @@ export class Map extends React.Component<MapProps> {
     } catch (e) {
       alert('LOCATION SERVICES NOT AVAILABLE!');
     }
-    this.context.app.needingHelp.load(this.yourPosition);
+    this.context.app.humans.load();
   }
 
   render() {
@@ -65,17 +65,20 @@ export class Map extends React.Component<MapProps> {
           options={GMAP_OPTIONS}
           mapContainerStyle={{ width: '100%', height: '100vh' }}
         >
-          <MapMarker markerId={1000000} position={this.yourPosition} variant='you' />
-          {this.context.app.needingHelp.all.map(({ lat, lng, id }, index) => (
-            <MapMarker
-              markerId={id}
-              onMarkerClick={() => {
-                this.context.routingStore.push(`/contact/${id}`);
-              }}
-              position={{ lat, lng }}
-              variant='somebody'
-              key={id}
-            />
+          <MapMarker markerId={'1000000'} position={this.yourPosition} variant='you' />
+
+          {this.context.app.humans.asArray().map(({ id, lat, lng }) => (
+            <>
+              <MapMarker
+                markerId={id}
+                onMarkerClick={() => {
+                  this.context.routingStore.push(`/humans/${id}`);
+                }}
+                position={{ lat, lng }}
+                variant='somebody'
+                key={id}
+              />
+            </>
           ))}
         </GoogleMap>
       </LoadScript>

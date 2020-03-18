@@ -1,4 +1,8 @@
 export const contact = {
-  asks_for_help_with: 'Bitte um Hilfe bei:',
-  offer_help: (name: string) => `${name} Hilfe anbieten`
+  your_contact_with: 'Dein Kontakt zu ',
+  status: {
+    open: (name: string) => `Du hast ${name} angefragt`,
+    connected: 'Verbunden',
+    closed: 'Diese Verbindung wurde beendet'
+  }
 };

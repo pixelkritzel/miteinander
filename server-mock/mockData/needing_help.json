@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": "0",
     "lat": 52.48025619114025,
     "lng": 13.448806546002196,
     "nickname": "Donald",
@@ -19,7 +19,7 @@
     "isVulnerable": false
   },
   {
-    "id": 1,
+    "id": "1",
     "lat": 52.48179824340709,
     "lng": 13.447776577740477,
     "nickname": "Dagobert",
@@ -34,7 +34,7 @@
     "isVulnerable": false
   },
   {
-    "id": 2,
+    "id": "2",
     "lat": 52.48319649831199,
     "lng": 13.45269038465576,
     "nickname": "Daisy",
@@ -48,7 +48,7 @@
     "isVulnerable": true
   },
   {
-    "id": 3,
+    "id": "3",
     "lat": 52.48250391031573,
     "lng": 13.446574948101805,
     "nickname": "Daniel",
@@ -62,7 +62,7 @@
     "isVulnerable": true
   },
   {
-    "id": 4,
+    "id": "4",
     "lat": 52.48102722402994,
     "lng": 13.458162091046141,
     "nickname": "Tick",
@@ -76,7 +76,7 @@
     "isVulnerable": true
   },
   {
-    "id": 5,
+    "id": "5",
     "lat": 52.47847884351453,
     "lng": 13.454063675671385,
     "nickname": "Trick",
@@ -90,7 +90,7 @@
     "isVulnerable": true
   },
   {
-    "id": 6,
+    "id": "6",
     "lat": 52.47866180908524,
     "lng": 13.449149868756102,
     "nickname": "Track",
@@ -104,7 +104,7 @@
     "isVulnerable": true
   },
   {
-    "id": 7,
+    "id": "7",
     "lat": 52.47939366375959,
     "lng": 13.44569518354492,
     "nickname": "Mickey",
@@ -118,7 +118,7 @@
     "isVulnerable": true
   },
   {
-    "id": 8,
+    "id": "8",
     "lat": 52.48179824340709,
     "lng": 13.459985993176268,
     "nickname": "Goofey",
@@ -132,7 +132,7 @@
     "isVulnerable": true
   },
   {
-    "id": 9,
+    "id": "9",
     "lat": 52.48311809267103,
     "lng": 13.450308583050536,
     "nickname": "Panzerkancker No. 1",
@@ -146,7 +146,7 @@
     "isVulnerable": true
   },
   {
-    "id": 10,
+    "id": "10",
     "lat": 52.47905387560328,
     "lng": 13.453548691540526,
     "nickname": "Panzerkancker No. 2",
@@ -160,7 +160,7 @@
     "isVulnerable": true
   },
   {
-    "id": 11,
+    "id": "11",
     "lat": 52.47962890017672,
     "lng": 13.459063313275145,
     "nickname": "Panzerkancker No. 3",

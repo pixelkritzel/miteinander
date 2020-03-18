@@ -12,6 +12,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "localforage": "^1.7.3",
     "mobx": "^5.15.4",
@@ -22,10 +23,11 @@
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",
     "react-scripts": "3.4.0",
-    "typescript": "~3.7.2"
+    "typescript": "3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server-mock": "node server-mock/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -48,6 +50,9 @@
   "devDependencies": {
     "@types/history": "^4.7.5",
     "@types/react-router": "^5.1.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "node-sass": "^4.13.1"
   }
 }
